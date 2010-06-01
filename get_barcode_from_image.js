@@ -59,7 +59,7 @@
             }
             var curr = bmp[0],
                 count = 1,
-                lines = Array();
+                lines = [];
             for(var col = 0; col < width; col++){
                 if(bmp[col] == curr){ count++; }
                 else{
