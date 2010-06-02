@@ -74,15 +74,13 @@
             for(var i = 1, l = lines.length; i < l; i++){
                 if(code.length < 6){ var group = lines.slice(i * 4, (i * 4) + 4); }
                 else{ var group = lines.slice((i * 4 ) + 5, (i * 4) + 9); }
-                var digits = '' + Math.round(group[0] / bar)
-                        + Math.round(group[1] / bar)
-                        + Math.round(group[2] / bar)
-                        + Math.round(group[3] / bar),
-                    invert = '' + Math.round(group[3] / bar)
-                        + Math.round(group[2] / bar)
-                        + Math.round(group[1] / bar)
-                        + Math.round(group[0] / bar);
-                code += u[digits] || u[invert] || 'X';
+                var digits = [
+                    Math.round(group[0] / bar),
+                    Math.round(group[1] / bar),
+                    Math.round(group[2] / bar),
+                    Math.round(group[3] / bar)
+                ];
+                code += u[digits.join('')] || u[digits.reverse().join('')] || 'X';
                 if(12 == code.length){ break; }
             }
             if(-1 == code.indexOf('X')){ return code; }
