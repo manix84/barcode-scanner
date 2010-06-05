@@ -26,11 +26,12 @@
             height = img.height,
             spoints = [1, 9, 2, 8, 3, 7, 4, 6, 5],
             numLines = spoints.length,
-            slineStep = height / numLines;
+            slineStep = height / (numLines + 1);
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(img, 0, 0);
         while(numLines--){
+            console.log(spoints[numLines]);
             var pxLine = ctx.getImageData(0, slineStep * spoints[numLines], width, 2).data,
                 sum = [],
                 min = 0,
@@ -70,7 +71,7 @@
                 }
             }
             var code = '',
-                bar = Math.round((lines[1] + lines[2] + lines[3]) / 3),
+                bar = ~~((lines[1] + lines[2] + lines[3]) / 3),
                 u = UPC_SET;
             for(var i = 1, l = lines.length; i < l; i++){
                 if(code.length < 6){ var group = lines.slice(i * 4, (i * 4) + 4); }
@@ -82,7 +83,7 @@
                     Math.round(group[3] / bar)
                 ];
                 code += u[digits.join('')] || u[digits.reverse().join('')] || 'X';
-                if(12 == code.length){ break; }
+                if(12 == code.length){ return code; break; }
             }
             if(-1 == code.indexOf('X')){ return code || false; }
         }
