@@ -24,13 +24,14 @@
             ctx = canvas.getContext("2d"),
             width = img.width,
             height = img.height,
-            numLines = 3,
-            slineStep = height / (numLines + 1);
+            spoints = [1, 9, 2, 8, 3, 7, 4, 6, 5],
+            numLines = spoints.length,
+            slineStep = height / numLines;
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(img, 0, 0);
         while(numLines--){
-            var pxLine = ctx.getImageData(0, slineStep * numLines, width, 2).data,
+            var pxLine = ctx.getImageData(0, slineStep * spoints[numLines], width, 2).data,
                 sum = [],
                 min = 0,
                 max = 0;
@@ -83,7 +84,7 @@
                 code += u[digits.join('')] || u[digits.reverse().join('')] || 'X';
                 if(12 == code.length){ break; }
             }
-            if(-1 == code.indexOf('X')){ return code; }
+            if(-1 == code.indexOf('X')){ return code || false; }
         }
         return false;
     }
