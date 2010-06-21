@@ -21,12 +21,13 @@
         var doc = document,
             img = "object" == typeof imgOrId ? imgOrId : doc.getElementById(imgOrId),
             canvas = doc.createElement("canvas"),
-            ctx = canvas.getContext("2d"),
             width = img.width,
             height = img.height,
+            ctx = canvas.getContext("2d"),
             spoints = [1, 9, 2, 8, 3, 7, 4, 6, 5],
             numLines = spoints.length,
-            slineStep = height / (numLines + 1);
+            slineStep = height / (numLines + 1),
+            round = Math.round;
         canvas.width = width;
         canvas.height = height;
         ctx.drawImage(img, 0, 0);
@@ -77,10 +78,10 @@
                 if(code.length < 6){ var group = lines.slice(i * 4, (i * 4) + 4); }
                 else{ var group = lines.slice((i * 4 ) + 5, (i * 4) + 9); }
                 var digits = [
-                    Math.round(group[0] / bar),
-                    Math.round(group[1] / bar),
-                    Math.round(group[2] / bar),
-                    Math.round(group[3] / bar)
+                    round(group[0] / bar),
+                    round(group[1] / bar),
+                    round(group[2] / bar),
+                    round(group[3] / bar)
                 ];
                 code += u[digits.join('')] || u[digits.reverse().join('')] || 'X';
                 if(12 == code.length){ return code; break; }
